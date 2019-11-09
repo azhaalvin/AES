@@ -45,12 +45,10 @@ def hexa(a):
         for i in range(4):
             bit = []
             for ii in range(4):
-                c=[]
                 b=hex(ord(a[d]))
                 b = format(ord(a[d]), "x")
                 b=int(b,16)
                 d=d+1
-
                 bit.append(b)
             array.append(bit)
     return array
