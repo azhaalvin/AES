@@ -42,6 +42,8 @@ defaultMatrix = [[0x02, 0x03, 0x01, 0x01],
                 [0x01, 0x01, 0x02, 0x03],
                 [0x03, 0x01, 0x01, 0x02]]
 
+newMatrix = []
+
 def hexa(a):
     n = len(a)-1
     d = 0
@@ -55,20 +57,38 @@ def hexa(a):
                 b = format(ord(a[d]), "x")
                 b=int(b,16)
                 d=d+1
-
                 bit.append(b)
             array.append(bit)
     return array
 
 def mixCol(leftMatrix, rightMatrix):
-
-        return 0
+        #algorithm
+        for i in range(4):
+                for j in range(4):
+                        tempHex = leftMatrix[i][j] * rightMatrix[i][j]
+                        HexLeft = hex(tempHex)
+                        ModLeft = hex(283)
+                        tempResult = tempHex % 283
+                        newMatrix.append(hex(tempResult))
+        return newMatrix
 
 print(Sbox[6][1])
 print(defaultMatrix[0][0])
 
-x=[]    
+x=[]
 a= "azhaalvinrahmans"
 x = hexa(a)
+coba = defaultMatrix[0][0] * x[0][0]
+hexa = hex(coba)
+print("========")
+print(hexa)
+print(defaultMatrix[0][0] * x[0][0])
+mod = hex(283)
+
+
+print(hex(283))
 print(x)
+print(x[0][0])
+print('MIX Columns')
+print(mixCol(defaultMatrix,x))
 print(Rcon[0] ^ x[3][1])
