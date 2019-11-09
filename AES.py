@@ -62,14 +62,21 @@ def hexa(a):
     return array
 
 def mixCol(leftMatrix, rightMatrix):
+        #local variable
+        tempBin    = []
+        tempResult = []
         #algorithm
         for i in range(4):
                 for j in range(4):
-                        tempHex = leftMatrix[i][j] * rightMatrix[i][j]
-                        HexLeft = hex(tempHex)
-                        ModLeft = hex(283)
-                        tempResult = tempHex % 283
-                        newMatrix.append(hex(tempResult))
+                        tempHex = leftMatrix[i][j] * rightMatrix[j][i]
+                        tempMOD = tempHex % 283
+                        tempMODHex = hex(tempMOD)
+                        tempBin.append(tempMOD)
+                        if (j == 1): temp1 = tempBin[0] ^ tempBin[1]
+                        elif (j == 3): temp2 = tempBin[2] ^ tempBin[3]
+                temp = temp1 ^ temp2
+                newMatrix.append(hex(temp))
+                tempBin.clear()
         return newMatrix
 
 print(Sbox[6][1])
@@ -84,8 +91,6 @@ print("========")
 print(hexa)
 print(defaultMatrix[0][0] * x[0][0])
 mod = hex(283)
-
-
 print(hex(283))
 print(x)
 print(x[0][0])
