@@ -43,7 +43,6 @@ defaultMatrix = [[0x02, 0x03, 0x01, 0x01],
                 [0x03, 0x01, 0x01, 0x02]]
 
 newMatrix = []
-newest    = []
 
 def hexa(a):
     n = len(a)-1
@@ -69,73 +68,39 @@ def mixCol(leftMatrix, rightMatrix):
         #algorithm
         for i in range(4):
                 for j in range(4):
-                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[0][j])
-                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
                         tempInt = leftMatrix[0][j] * rightMatrix[j][0+i]
                         tempMOD = tempInt % 283
                         tempBin.append(tempMOD)
-                        if (j == 1): 
-                                temp1 = tempBin[0] ^ tempBin[1]
-                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
-                        elif (j == 3): 
-                                temp2 = tempBin[2] ^ tempBin[3]
-                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                        if (j == 1): temp1 = tempBin[0] ^ tempBin[1]
+                        elif (j == 3): temp2 = tempBin[2] ^ tempBin[3]
                 temp = temp1 ^ temp2
-                print("TEMP : ", temp)
-                print()
                 newMatrix.append(temp)
                 tempBin.clear()
-                temp = 0
                 for j in range(4):
-                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[1][j])
-                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
                         tempInt = leftMatrix[1][j] * rightMatrix[j][0+i]
                         tempMOD = tempInt % 283
                         tempBin.append(tempMOD)
-                        if (j == 1): 
-                                temp1 = tempBin[0] ^ tempBin[1]
-                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
-                        elif (j == 3): 
-                                temp2 = tempBin[2] ^ tempBin[3]
-                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                        if (j == 1): temp1 = tempBin[0] ^ tempBin[1]
+                        elif (j == 3): temp2 = tempBin[2] ^ tempBin[3]
                 temp = temp1 ^ temp2
-                print("TEMP : ", temp)
-                print()
                 newMatrix.append(temp)
                 tempBin.clear()
                 for j in range(4):
-                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[2][j])
-                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
                         tempInt = leftMatrix[2][j] * rightMatrix[j][0+i]
                         tempMOD = tempInt % 283
                         tempBin.append(tempMOD)
-                        if (j == 1): 
-                                temp1 = tempBin[0] ^ tempBin[1]
-                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
-                        elif (j == 3): 
-                                temp2 = tempBin[2] ^ tempBin[3]
-                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                        if (j == 1): temp1 = tempBin[0] ^ tempBin[1]
+                        elif (j == 3): temp2 = tempBin[2] ^ tempBin[3]
                 temp = temp1 ^ temp2
-                print("TEMP : ", temp)
-                print()
                 newMatrix.append(temp)
                 tempBin.clear()
-                temp = 0
                 for j in range(4):
-                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[3][j])
-                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
                         tempInt = leftMatrix[3][j] * rightMatrix[j][0+i]
                         tempMOD = tempInt % 283
                         tempBin.append(tempMOD)
-                        if (j == 1): 
-                                temp1 = tempBin[0] ^ tempBin[1]
-                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
-                        elif (j == 3): 
-                                temp2 = tempBin[2] ^ tempBin[3]
-                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                        if (j == 1):  temp1 = tempBin[0] ^ tempBin[1]
+                        elif (j == 3): temp2 = tempBin[2] ^ tempBin[3]
                 temp = temp1 ^ temp2
-                print("TEMP : ", temp)
-                print()
                 newMatrix.append(temp)
                 tempBin.clear()
                 temp = 0
