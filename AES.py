@@ -43,6 +43,7 @@ defaultMatrix = [[0x02, 0x03, 0x01, 0x01],
                 [0x03, 0x01, 0x01, 0x02]]
 
 newMatrix = []
+newest    = []
 
 def hexa(a):
     n = len(a)-1
@@ -63,21 +64,35 @@ def hexa(a):
 
 def mixCol(leftMatrix, rightMatrix):
         #local variable
-        tempBin    = []
-        tempResult = []
+        tempBin = []
+        i = 0
+        k = 0
         #algorithm
-        for i in range(4):
+        while(k < 4):
                 for j in range(4):
+                        #baris ke-0 dan kolom ke-0
+                        print(" Left Matrix [",i,"][",j,"] : ",leftMatrix[i][j+i])
+                        print("Right Matrix [",j,"][",i,"] : ",rightMatrix[j+i][i])
                         tempHex = leftMatrix[i][j] * rightMatrix[j][i]
                         tempMOD = tempHex % 283
-                        tempMODHex = hex(tempMOD)
                         tempBin.append(tempMOD)
-                        if (j == 1): temp1 = tempBin[0] ^ tempBin[1]
-                        elif (j == 3): temp2 = tempBin[2] ^ tempBin[3]
+                        if (j == 1): 
+                                temp1 = tempBin[0] ^ tempBin[1]
+                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
+                        elif (j == 3): 
+                                temp2 = tempBin[2] ^ tempBin[3]
+                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
                 temp = temp1 ^ temp2
-                newMatrix.append(hex(temp))
+                print("TEMP : ", temp)
+                print()
+                newMatrix.append(temp)
+                newest.append(newMatrix)   
                 tempBin.clear()
-        return newMatrix
+                temp = 0
+                k = i+1
+                if(k==3):
+                        i = i+1
+        return newest
 
 print(Sbox[6][1])
 print(defaultMatrix[0][0])
@@ -85,15 +100,6 @@ print(defaultMatrix[0][0])
 x=[]
 a= "azhaalvinrahmans"
 x = hexa(a)
-coba = defaultMatrix[0][0] * x[0][0]
-hexa = hex(coba)
-print("========")
-print(hexa)
-print(defaultMatrix[0][0] * x[0][0])
-mod = hex(283)
-print(hex(283))
-print(x)
-print(x[0][0])
-print('MIX Columns')
-print(mixCol(defaultMatrix,x))
-print(Rcon[0] ^ x[3][1])
+print("Default Matrix : ", defaultMatrix)
+print("x              : ", x)
+print("Mix Column     : ", mixCol(defaultMatrix,x))
