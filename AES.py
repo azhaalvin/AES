@@ -64,7 +64,7 @@ def hexa(a):
 def mixCol(leftMatrix, rightMatrix):
         #local variable
         tempBin = []
-
+        splitList = [4, 8, 12]
         #algorithm
         for i in range(4):
                 for j in range(4):
@@ -104,7 +104,8 @@ def mixCol(leftMatrix, rightMatrix):
                 newMatrix.append(temp)
                 tempBin.clear()
                 temp = 0
-        return newMatrix
+        res = [newMatrix[i : j] for i, j in zip([0] + splitList, splitList + [None])] 
+        return res
 
 print(Sbox[6][1])
 print(defaultMatrix[0][0])
