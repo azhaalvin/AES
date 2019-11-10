@@ -62,82 +62,17 @@ def hexa(a):
             array.append(bit)
     return array
 
-def cek(x): #mengganti string ke int ntuk index s-box
-    if x == '0':
-        c = 0
-        return c
-    elif x == '1':
-        c = 1
-        return c 
-    elif x == '2':
-        c = 2
-        return c 
-    elif x == '3':
-        c = 3
-        return c 
-    elif x == '4':
-        c = 4
-        return c 
-    elif x == '5':
-        c = 5
-        return c 
-    elif x == '6':
-        c = 6
-        return c 
-    elif x == '7':
-        c = 7
-        return c
-    elif x == '8':
-        c = 8
-        return c 
-    elif x == '9':
-        c = 9
-        return c
-    elif x == 'A' or x == 'a' :
-        c = 10
-        return c
-    elif x == 'B' or x == 'b':
-        c = 11
-        return c 
-    elif x == 'C' or x == 'c':
-        c = 12
-        return c 
-    elif x == 'D' or x == 'd':
-        c = 13
-        return c 
-    elif x == 'E' or x == 'e':
-        c = 14
-        return c
-    elif x == 'F' or x == 'f':
-        c = 15
-        return c   
-
-def subB(x): #fungsi sib byte
-        for i in range(4):
-                for ii in range(4):
-                        nilai = hex(x[i][ii])
-                        sbX = nilai [2]
-                        sbY = nilai [3]
-                        sbX = cek(sbX)
-                        sbY = cek(sbY)
-                        x[i][ii] = Sbox[sbX][sbY]
-                        #print('sbx=',sbX)
-                        #print('sby=',sbY)
-        return x
-
 def mixCol(leftMatrix, rightMatrix):
         #local variable
         tempBin = []
-        i = 0
-        k = 0
+
         #algorithm
-        while(k < 4):
+        for i in range(4):
                 for j in range(4):
-                        #baris ke-0 dan kolom ke-0
-                        print(" Left Matrix [",i,"][",j,"] : ",leftMatrix[i][j+i])
-                        print("Right Matrix [",j,"][",i,"] : ",rightMatrix[j+i][i])
-                        tempHex = leftMatrix[i][j] * rightMatrix[j][i]
-                        tempMOD = tempHex % 283
+                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[0][j])
+                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
+                        tempInt = leftMatrix[0][j] * rightMatrix[j][0+i]
+                        tempMOD = tempInt % 283
                         tempBin.append(tempMOD)
                         if (j == 1): 
                                 temp1 = tempBin[0] ^ tempBin[1]
@@ -149,13 +84,62 @@ def mixCol(leftMatrix, rightMatrix):
                 print("TEMP : ", temp)
                 print()
                 newMatrix.append(temp)
-                newest.append(newMatrix)   
                 tempBin.clear()
                 temp = 0
-                k = i+1
-                if(k==3):
-                        i = i+1
-        return newest
+                for j in range(4):
+                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[1][j])
+                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
+                        tempInt = leftMatrix[1][j] * rightMatrix[j][0+i]
+                        tempMOD = tempInt % 283
+                        tempBin.append(tempMOD)
+                        if (j == 1): 
+                                temp1 = tempBin[0] ^ tempBin[1]
+                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
+                        elif (j == 3): 
+                                temp2 = tempBin[2] ^ tempBin[3]
+                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                temp = temp1 ^ temp2
+                print("TEMP : ", temp)
+                print()
+                newMatrix.append(temp)
+                tempBin.clear()
+                for j in range(4):
+                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[2][j])
+                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
+                        tempInt = leftMatrix[2][j] * rightMatrix[j][0+i]
+                        tempMOD = tempInt % 283
+                        tempBin.append(tempMOD)
+                        if (j == 1): 
+                                temp1 = tempBin[0] ^ tempBin[1]
+                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
+                        elif (j == 3): 
+                                temp2 = tempBin[2] ^ tempBin[3]
+                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                temp = temp1 ^ temp2
+                print("TEMP : ", temp)
+                print()
+                newMatrix.append(temp)
+                tempBin.clear()
+                temp = 0
+                for j in range(4):
+                        print(" Left Matrix [",i,"][",j,"] : ",               leftMatrix[3][j])
+                        print("Right Matrix [",j,"][",i,"] : ",               rightMatrix[j][0+i])
+                        tempInt = leftMatrix[3][j] * rightMatrix[j][0+i]
+                        tempMOD = tempInt % 283
+                        tempBin.append(tempMOD)
+                        if (j == 1): 
+                                temp1 = tempBin[0] ^ tempBin[1]
+                                print("temp1: : ",temp1," dengan temp[0] ",tempBin[0]," dan temp[1] ",tempBin[1])
+                        elif (j == 3): 
+                                temp2 = tempBin[2] ^ tempBin[3]
+                                print("temp2: : ",temp2," dengan temp[0] ",tempBin[2]," dan temp[1] ",tempBin[3])
+                temp = temp1 ^ temp2
+                print("TEMP : ", temp)
+                print()
+                newMatrix.append(temp)
+                tempBin.clear()
+                temp = 0
+        return newMatrix
 
 print(Sbox[6][1])
 print(defaultMatrix[0][0])
