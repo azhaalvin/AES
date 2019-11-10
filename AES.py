@@ -62,6 +62,69 @@ def hexa(a):
             array.append(bit)
     return array
 
+def cek(x): #mengganti string ke int ntuk index s-box
+    if x == '0':
+        c = 0
+        return c
+    elif x == '1':
+        c = 1
+        return c 
+    elif x == '2':
+        c = 2
+        return c 
+    elif x == '3':
+        c = 3
+        return c 
+    elif x == '4':
+        c = 4
+        return c 
+    elif x == '5':
+        c = 5
+        return c 
+    elif x == '6':
+        c = 6
+        return c 
+    elif x == '7':
+        c = 7
+        return c
+    elif x == '8':
+        c = 8
+        return c 
+    elif x == '9':
+        c = 9
+        return c
+    elif x == 'A' or x == 'a' :
+        c = 10
+        return c
+    elif x == 'B' or x == 'b':
+        c = 11
+        return c 
+    elif x == 'C' or x == 'c':
+        c = 12
+        return c 
+    elif x == 'D' or x == 'd':
+        c = 13
+        return c 
+    elif x == 'E' or x == 'e':
+        c = 14
+        return c
+    elif x == 'F' or x == 'f':
+        c = 15
+        return c   
+
+def subB(x): #fungsi sib byte
+        for i in range(4):
+                for ii in range(4):
+                        nilai = hex(x[i][ii])
+                        sbX = nilai [2]
+                        sbY = nilai [3]
+                        sbX = cek(sbX)
+                        sbY = cek(sbY)
+                        x[i][ii] = Sbox[sbX][sbY]
+                        #print('sbx=',sbX)
+                        #print('sby=',sbY)
+        return x
+
 def mixCol(leftMatrix, rightMatrix):
         #local variable
         tempBin = []
