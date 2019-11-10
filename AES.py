@@ -138,6 +138,32 @@ def shiftRow(x): #pemangginya
         x[i] = shifter(x[i],i)
     return x
 
+def subBKey(x): #Sub byte key 
+    for ii in range(4):
+        nilai = hex(x[ii])
+        sbX = nilai [2]
+        sbY = nilai [3]
+        sbX = cek(sbX)
+        sbY = cek(sbY)
+        x[ii] = Sbox[sbX][sbY]
+        #print('sbx=',sbX)
+        #print('sby=',sbY)
+        return x
+
+def xor(x,y):
+    for i in range(4):
+        x[i] = x[i] ^ y[1]
+    return x
+
+def KeySchedule(x,n):
+    x1 = []
+    x1 = subBKey(x[0])
+    x[0] = xor(x[0],Rcon[n])
+    x[0] = xor(x[0],x1)
+    for i in range(1,4):
+        x[i] = xor(x[i-1],x[i])
+    return x
+
 
 def mixCol(leftMatrix, rightMatrix):
         #local variable
