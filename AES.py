@@ -124,6 +124,21 @@ def subB(x): #fungsi sib byte
                         #print('sby=',sbY)
         return x
 
+def shifter(x,i): #fungsi pembaliknya 
+    for n in range(i):
+        temp = x[0]
+        x[0] = x[1]
+        x[1] = x[2]
+        x[2] = x[3]
+        x[3] = temp
+    return x
+
+def shiftRow(x): #pemangginya 
+    for i in range(4):
+        x[i] = shifter(x[i],i)
+    return x
+
+
 def mixCol(leftMatrix, rightMatrix):
         #local variable
         tempBin = []
