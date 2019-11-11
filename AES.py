@@ -157,6 +157,7 @@ def xor(x,y):
 
 def KeySchedule(x,n):
     newKey=[]
+    n = n % 4
     x1 = []
     x1 = subBKey(x[3])
     x[0] = xor(x[0],Rcon[n])
@@ -169,6 +170,12 @@ def KeySchedule(x,n):
             print('x ',i,'=',x[i])
         print('newKey ',i,'=',newKey)
     return newKey
+
+def addroundkey(x,y):
+    hasil = []
+    for i in range(4):
+        hasil[i] = xor(x[i],y[i])
+    return hasil
 
 
 def mixCol(leftMatrix, rightMatrix):
@@ -217,12 +224,29 @@ def mixCol(leftMatrix, rightMatrix):
         res = [newMatrix[i : j] for i, j in zip([0] + splitList, splitList + [None])] 
         return res
 
-print(Sbox[6][1])
-print(defaultMatrix[0][0])
+def encript(plain,key):
+    keyS =[]
+    roundkey =[]
+    plain = hexa(plain)
+    key = hexa(key)
+    for i in range(10):
+        if i == 0 :
+            roundkey =  addroundkey(plain,key)
+            keyS= KeySchedule(keyS,i)
+        else:
+            plain = roundkey
+            plain = subB(plain)
+            plain = shiftRow(plain)
+            plain = mixCol(defaultMatrix,plain)
+            plain = addroundkey(plain,keyS)
+            keyS= KeySchedule(keyS,i)
+    return plain
+
 
 x=[]
-a= "azhaalvinrahmans"
-x = hexa(a)
-print("Default Matrix : ", defaultMatrix)
-print("x              : ", x)
-print("Mix Column     : ", mixCol(defaultMatrix,x))
+plain= "azhaalvinrahmans"
+key=   "1234567892345670"
+x = encript(plain,key)
+
+print(x)
+
