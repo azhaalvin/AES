@@ -1,3 +1,4 @@
+
 #SBOX
 Rcon = [[0x8d, 0x01, 0x02, 0x04], [0x08, 0x10, 0x20, 0x40], [0x80, 0x1b, 0x36,0x6c], [0xd8, 0xab, 0x4d, 0x9a] ]
 Sbox = [
@@ -114,12 +115,26 @@ def cek(x): #mengganti string ke int ntuk index s-box
 def subB(x): #fungsi sib byte
         for i in range(4):
                 for ii in range(4):
+                        #print("cek ascii = ",x[i][ii])
                         nilai = hex(x[i][ii])
-                        sbX = nilai [2]
-                        sbY = nilai [3]
-                        sbX = cek(sbX)
-                        sbY = cek(sbY)
+                        nilai2=int(nilai,16)
+                        #print("nilai=",nilai)
+                        if nilai2 < 10 :
+                            sbX = 0
+                            sbY = 0
+                        else:
+                            if len(nilai) == 3:
+                                sbX = 0
+                                sbY = nilai [2]
+                                sbY = cek(sbY)
+                            else:
+                                sbX = nilai [2]
+                                sbX = cek(sbX)
+                                sbY = nilai [3]
+                                sbY = cek(sbY)
                         x[i][ii] = Sbox[sbX][sbY]
+                        #if hex(Sbox[sbX][sbY]) == 0x09 :
+                        #print("cek s-boxnya",hex(Sbox[sbX][sbY]))
                         #print('sbx=',sbX)
                         #print('sby=',sbY)
         return x
@@ -162,19 +177,17 @@ def KeySchedule(x,n):
     x1 = subBKey(x[3])
     x[0] = xor(x[0],Rcon[n])
     x[0] = xor(x[0],x1)
-    print(x[0])
     for i in range(4):
         newKey.append(x[i])
         if i > 0 :
             x[i] = xor(x[i],x[i-1])
-            print('x ',i,'=',x[i])
-        print('newKey ',i,'=',newKey)
     return newKey
 
 def addroundkey(x,y):
     hasil = []
     for i in range(4):
-        hasil[i] = xor(x[i],y[i])
+        hasil.append(xor(x[i],y[i]))
+    print("hasil =",hasil)
     return hasil
 
 
@@ -232,14 +245,15 @@ def encript(plain,key):
     for i in range(10):
         if i == 0 :
             roundkey =  addroundkey(plain,key)
-            keyS= KeySchedule(keyS,i)
-        else:
+            keyS= KeySchedule(key,i)
             plain = roundkey
+        else:
             plain = subB(plain)
             plain = shiftRow(plain)
             plain = mixCol(defaultMatrix,plain)
             plain = addroundkey(plain,keyS)
             keyS= KeySchedule(keyS,i)
+            #print("plainya blok",plain)
     return plain
 
 
@@ -248,5 +262,5 @@ plain= "azhaalvinrahmans"
 key=   "1234567892345670"
 x = encript(plain,key)
 
-print(x)
+#print(x)
 
