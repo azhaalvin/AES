@@ -266,7 +266,6 @@ def encript(plain,key):
             plain = mixCol(defaultMatrix,plain)
             plain = addroundkey(plain,keyS)
             keyS= KeySchedule(keyS,i)
-            #print("plainya blok",plain)
     return plain
 
 
