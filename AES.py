@@ -1,4 +1,3 @@
-
 #SBOX
 Rcon = [[0x8d, 0x01, 0x02, 0x04], [0x08, 0x10, 0x20, 0x40], [0x80, 0x1b, 0x36,0x6c], [0xd8, 0xab, 0x4d, 0x9a] ]
 Sbox = [
@@ -168,6 +167,11 @@ def subBKey(x): #Sub byte key
 def xor(x,y):
     for i in range(4):
         x[i] = x[i] ^ y[1]
+    print("x ke-1 : ",x[0])
+    print("x ke-2 : ",x[1])
+    print("x ke-3 : ",x[2])
+    print("x ke-4 : ",x[3])
+    print()
     return x
 
 def KeySchedule(x,n):
@@ -185,9 +189,16 @@ def KeySchedule(x,n):
 
 def addroundkey(x,y):
     hasil = []
+    status = False
+    str_list = [4]
+    res = []
     for i in range(4):
-        hasil.append(xor(x[i],y[i]))
-    print("hasil =",hasil)
+        if (i == 3):
+            status = True
+            res.append([x[i : j] for i, j in zip([0] + str_list, str_list + [None])])
+            hasil.append(xor(res[0][0][0],y[i]))
+        else:
+            hasil.append(xor(x[i],y[i]))
     return hasil
 
 
@@ -258,9 +269,13 @@ def encript(plain,key):
 
 
 x=[]
-plain= "azhaalvinrahmans"
-key=   "1234567892345670"
+# 16 key 
+# "azhaalvinrahmans"
+# "1234567892345670"
+val = input("input your name : ")
+plain = val
+valKey = input("input your key : ")
+key= valKey
 x = encript(plain,key)
 
 #print(x)
-
