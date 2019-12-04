@@ -1,4 +1,6 @@
+import tkinter
 from tkinter import *
+from tkinter import messagebox
 
 #SBOX
 Rcon = [[0x8d, 0x01, 0x02, 0x04], [0x08, 0x10, 0x20, 0x40], [0x80, 0x1b, 0x36,0x6c], [0xd8, 0xab, 0x4d, 0x9a] ]
@@ -266,17 +268,61 @@ def encript(plain,key):
             plain = mixCol(defaultMatrix,plain)
             plain = addroundkey(plain,keyS)
             keyS= KeySchedule(keyS,i)
-    qwe = plain[2][1]
-    qwe = format(qwe,"x")
-    print(str(qwe))
+    return plain
 
-    print(bytes.fromhex(qwe).decode('utf-8'))
-    print(plain)
+root = tkinter.Tk()
+root.geometry("900x300+400+300")
+root.title("Kripto")
+root.configure(background = "#000000")
 
-encript('azhaalvinrahmans','1234567892345670')
+def show(x):
+    lbl.config(text = x)
 
-"""a = 'd'
-b=hex(ord(a))
-print(b)
-print(bytes.fromhex('64').decode('utf-8'))"""
+def checkans():
+    global words,answers,num
+    var = e1.get()
+    var2 = e2.get()
+    x = encript(var,var2)
+    show(x)
 
+lbl = Label (
+    text = "Your here",
+    font = ("Verdana", 15),
+    bg = "#000000",
+    fg = "#FFFFFF",
+    )
+lbl.pack()
+ans1 = StringVar()
+ans2 = StringVar()
+e1 = Entry(
+    root,
+    font = ("Verdana", 16),
+    textvariable = ans1,
+)
+e1.pack(ipady=5,ipadx=5)
+
+e2 = Entry(
+    root,
+    font = ("Verdana", 16),
+    textvariable = ans2,
+)
+e2.pack(ipady=7,ipadx=7)
+
+
+
+
+
+btncheck = Button(
+    root,
+    text = "Check",
+    font = ("Comic sans ms", 16),
+    width = 16,
+    bg = "#4c4b4b",
+    fg = "#6ab04c",
+    relief = GROOVE,
+    command = checkans,
+)
+btncheck.pack(pady = 40)
+
+
+root.mainloop()

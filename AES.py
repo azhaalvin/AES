@@ -282,6 +282,10 @@ x=[]
 #print(x)
 
 #GUI 
+
+def default():
+    lbl.config(Text = "alvin")
+
 def encrypt_data():
      
   plainText_info = plainText.get()
@@ -307,7 +311,8 @@ def encrypt():
   global key_entry
   plainText = StringVar()
   key = StringVar()
- 
+
+  lbl = Label(screen1, Text = "your txt").lbl.pack()
   Label(screen1, text = "Please enter details below").pack()
   Label(screen1, text = "").pack()
   Label(screen1, text = "PlainText * ").pack()
@@ -334,5 +339,6 @@ def main_screen():
  
   screen.mainloop()
  
+
 main_screen()
   
