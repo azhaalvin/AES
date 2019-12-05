@@ -273,7 +273,7 @@ def encript(plain,key):
 root = tkinter.Tk()
 root.geometry("900x300+400+300")
 root.title("Kripto")
-root.configure(background = "#000000")
+root.configure(background = "#d6e5fa")
 
 def show(x):
     lbl.config(text = x)
@@ -286,39 +286,35 @@ def checkans():
     show(x)
 
 lbl = Label (
-    text = "Your here",
+    text = "hasil enkripsi",
     font = ("Verdana", 15),
-    bg = "#000000",
-    fg = "#FFFFFF",
+    bg = "#d6e5fa",
+    fg = "#000000",
     )
 lbl.pack()
 ans1 = StringVar()
 ans2 = StringVar()
 e1 = Entry(
     root,
-    font = ("Verdana", 16),
+    font = ("Roboto", 16),
     textvariable = ans1,
 )
 e1.pack(ipady=5,ipadx=5)
 
 e2 = Entry(
     root,
-    font = ("Verdana", 16),
+    font = ("Roboto", 16),
     textvariable = ans2,
 )
-e2.pack(ipady=7,ipadx=7)
-
-
-
-
+e2.pack(ipady=7,ipadx=7,pady = 10)
 
 btncheck = Button(
     root,
     text = "Check",
-    font = ("Comic sans ms", 16),
+    font = ("Roboto", 16),
     width = 16,
     bg = "#4c4b4b",
-    fg = "#6ab04c",
+    fg = "#FFFFFF",
     relief = GROOVE,
     command = checkans,
 )

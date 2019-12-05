@@ -1,4 +1,6 @@
+import tkinter
 from tkinter import *
+from tkinter import messagebox
 
 #SBOX
 Rcon = [[0x8d, 0x01, 0x02, 0x04], [0x08, 0x10, 0x20, 0x40], [0x80, 0x1b, 0x36,0x6c], [0xd8, 0xab, 0x4d, 0x9a] ]
@@ -268,77 +270,55 @@ def encript(plain,key):
             keyS= KeySchedule(keyS,i)
     return plain
 
+root = tkinter.Tk()
+root.geometry("900x300+400+300")
+root.title("Kripto")
+root.configure(background = "#d6e5fa")
 
-x=[]
-# 16 key 
-# "azhaalvinrahmans"
-# "1234567892345670"
-# val = input("input your name : ")
-# plain = val
-# valKey = input("input your key : ")
-# key= valKey
-# x = encript(plain,key)
+def show(x):
+    lbl.config(text = x)
 
-#print(x)
+def checkans():
+    global words,answers,num
+    var = e1.get()
+    var2 = e2.get()
+    x = encript(var,var2)
+    show(x)
 
-#GUI 
+lbl = Label (
+    text = "hasil enkripsi",
+    font = ("Verdana", 15),
+    bg = "#d6e5fa",
+    fg = "#000000",
+    )
+lbl.pack()
+ans1 = StringVar()
+ans2 = StringVar()
+e1 = Entry(
+    root,
+    font = ("Roboto", 16),
+    textvariable = ans1,
+)
+e1.pack(ipady=5,ipadx=5)
 
-def default():
-    lbl.config(Text = "alvin")
+e2 = Entry(
+    root,
+    font = ("Roboto", 16),
+    textvariable = ans2,
+)
+e2.pack(ipady=7,ipadx=7,pady = 10)
 
-def encrypt_data():
-     
-  plainText_info = plainText.get()
-  key_info = key.get()
- 
-  file=open(plainText_info+".txt", "w")
-  file.write(plainText_info+"\n")
-  file.write(key_info)
-  file.close()
- 
-  plainText_entry.delete(0, END)
-  key_entry.delete(0, END)
- 
-def encrypt():
-  global screen1
-  screen1 = Toplevel(screen)
-  screen1.title("AES")
-  screen1.geometry("300x250")
-   
-  global plainText
-  global key
-  global plainText_entry
-  global key_entry
-  plainText = StringVar()
-  key = StringVar()
+btncheck = Button(
+    root,
+    text = "Check",
+    font = ("Roboto", 16),
+    width = 16,
+    bg = "#4c4b4b",
+    fg = "#FFFFFF",
+    relief = GROOVE,
+    command = checkans,
+)
+btncheck.pack(pady = 40)
 
-  lbl = Label(screen1, Text = "your txt").lbl.pack()
-  Label(screen1, text = "Please enter details below").pack()
-  Label(screen1, text = "").pack()
-  Label(screen1, text = "PlainText * ").pack()
-  plainText_entry = Entry(screen1, textvariable = plainText)
-  plainText_entry.pack()
-  Label(screen1, text = "key * ").pack()
-  key_entry =  Entry(screen1, textvariable = key)
-  key_entry.pack()
-  Label(screen1, text = "").pack()
-  Button(screen1, text = "Encrypt", width = 10, height = 1, command = encrypt_data).pack()
- 
-def login():
-  print("Login session started")
- 
- 
-def main_screen():
-  global screen
-  screen = Tk()
-  screen.geometry("300x250")
-  screen.title("Notes 1.0")
-  Label(text = "Notes 1.0", bg = "grey", width = "300", height = "2", font = ("Calibri", 13)).pack()
-  Label(text = "").pack()
-  Button(text = "Encrypt Here",height = "2", width = "30", command = encrypt).pack()
- 
-  screen.mainloop()
- 
 
-main_screen()
-  
+root.mainloop()
